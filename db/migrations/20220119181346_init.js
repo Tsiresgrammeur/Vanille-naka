@@ -18,19 +18,15 @@ exports.up = function(knex) {
       table.increments('id');
       table.string('category_name');
     })
-    .createTable('product', (table) => {
-      table.increments('id');
-      table.string('product_name');
-      table.string('description', 400);
-      table.integer('price');
-      table.integer('category_id');
-      table.foreign('category_id').references('category.id').onDelete('CASCADE').onUpdate('CASCADE');
-    })
     .createTable('sale', (table) => {
       table.increments('id');
+      table.integer('user_id');
+      table.integer('product_id');
       table.date('sale_date');
       table.integer('quantity');
       table.string('status');
+      table.foreign('product_id').references('product.id').onDelete('CASCADE').onUpdate('CASCADE');
+      table.foreign('user_id').references('user.id').onDelete('CASCADE').onUpdate('CASCADE');
     })
     .createTable('stock_sheet', (table) => {
       table.increments('id');
@@ -39,6 +35,14 @@ exports.up = function(knex) {
       table.integer('quantity');
       table.integer('product_id')
       table.foreign('product_id').references('product.id').onDelete('CASCADE').onUpdate('CASCADE');
+    })
+    .createTable('product', (table) => {
+      table.increments('id');
+      table.string('product_name');
+      table.string('description', 400);
+      table.integer('price');
+      table.integer('category_id');
+      table.foreign('category_id').references('category.id').onDelete('CASCADE').onUpdate('CASCADE');
     })
 };
 
