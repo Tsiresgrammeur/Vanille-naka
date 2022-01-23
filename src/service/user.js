@@ -14,11 +14,10 @@ class UserService
 
   deleteUser(idUser)
   {
-    const numMat = idUser;
-    return userDAO.deleteUser(numMat);
+    return userDAO.deleteUser(idUser);
   }
 
-  updateUser(user)
+  updateUser(id,user)
   {
     const { firstName,lastName,email,password,address,country,role,numberPhone} = user;
     return userDAO.updateUser(id,firstName,lastName,email,password,address,country,role,numberPhone);

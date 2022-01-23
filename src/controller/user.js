@@ -28,14 +28,30 @@ class UserController {
   async deleteUser(req,res) {
 
     try{
-      const numMat = await userService.deleteUser(req.params.id);
-      res.status(201).json(numMat);
+      const id=await userService.deleteUser(req.params.id);
+      if(id)
+      res.status(201).json({success: true});
     }
 
     catch(err){
       console.error(err);
     }
   }
+
+  async updateUser(req,res) 
+  {
+    try{
+      const id = await userService.updateUser(req.params.id,req.body);
+      if(id)
+      res.status(201).json({success: true});
+    }
+
+    catch(err){
+      console.error(err);
+    }
+  }
+
+
 
 }
 

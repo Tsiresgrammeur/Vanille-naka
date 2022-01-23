@@ -4,5 +4,7 @@ const router = express.Router();
 
 router.get('/api/user/',userController.getUsers);
 router.post('/api/user/',userController.createUser);
+router.delete('/api/user/:id',userController.deleteUser);
+router.put('/api/user/:id',userController.updateUser)
 
 module.exports=router;

@@ -11,7 +11,6 @@ class userDAO {
 
   async createUser(first_name, last_name,email, password, address,country, role, numberPhone)
   {
-    console.log('hai')
     const hashed = await bcrypt.hash(password, saltRounds);
     const [id] = await db('user').insert({
       first_name,
@@ -36,7 +35,6 @@ class userDAO {
   {
      const hashed = await bcrypt.hash(password, saltRounds);
      return db('user').where({ id: id}).update({
-      num_mat: numMat,
       first_name,
       last_name,
       email,
