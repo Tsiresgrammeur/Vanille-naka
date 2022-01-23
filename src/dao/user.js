@@ -4,9 +4,9 @@ const saltRounds = 10;
 
 class userDAO {
 
-  async getUser(email)
+  async getUsers()
   {
-    return db('user').where('email', email).first();
+    return await db.select().table('user');
   }
 
   async createUser(first_name, last_name,email, password, address,country, role, numberPhone)

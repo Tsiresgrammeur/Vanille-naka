@@ -1,10 +1,10 @@
 const userService = require('../service/user');
 
 class UserController {
-  async getUser(req,res)
+  async getUsers(req,res)
   {
     try{
-      const numMat = await userService.getUser();
+      const numMat = await userService.getUsers();
       res.status(201).json(numMat);
     }
 

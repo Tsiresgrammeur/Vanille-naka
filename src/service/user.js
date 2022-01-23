@@ -2,9 +2,9 @@ const userDAO = require('../dao/user');
 
 class UserService 
 {
-  getUser(id)
+  getUsers()
   {
-    return userDAO.getUser(id);
+    return userDAO.getUsers();
   }
   async createUser(user)
   {
