@@ -2,6 +2,7 @@ const express=require('express')
 const userController=require('../controller/user');
 const categoryController=require('../controller/category');
 const productController=require('../controller/product');
+const saleController=require('../controller/sale');
 const router = express.Router();
 
 router.get('/api/user/',userController.getUsers);
@@ -22,4 +23,9 @@ router.get('/api/product/:index?',productController.getProducts);
 router.post('/api/product/',productController.createProduct);
 router.delete('/api/product/:id',productController.deleteProduct);
 router.put('/api/product/:id',productController.updateProduct)
+
+router.get('/api/sale/',saleController.getSales);
+router.post('/api/sale/',saleController.createSale);
+router.delete('/api/sale/:id',saleController.deleteSale);
+router.put('/api/sale/:id',saleController.updateSale)
 module.exports=router;
