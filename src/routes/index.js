@@ -18,7 +18,7 @@ router.delete('/api/category/:id',categoryController.deleteCategory);
 router.put('/api/category/:id',categoryController.updateCategory)
 
 
-router.get('/api/product/',productController.getProducts);
+router.post('/api/product/:index',productController.getProducts);
 router.get('/api/product/:id',productController.getOneProduct);
 router.post('/api/product/',productController.createProduct);
 router.delete('/api/product/:id',productController.deleteProduct);
