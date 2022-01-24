@@ -20,9 +20,9 @@ exports.up = function(knex) {
     })
     .createTable('product', (table) => {
       table.increments('id');
-      table.string('product_name');
+      table.string('name');
       table.string('description', 400);
-      table.integer('price');
+      table.float('price');
       table.integer('category_id');
       table.foreign('category_id').references('category.id').onDelete('CASCADE').onUpdate('CASCADE');
     })

@@ -24,7 +24,7 @@ class categoryDAO {
 
   async deleteCategory(id)
   {
-   return db('category').where('id',id).del();
+   return await db('category').where('id',id).del();
   }
 
   async updateCategory(id,name)

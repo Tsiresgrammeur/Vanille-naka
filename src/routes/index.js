@@ -1,6 +1,7 @@
 const express=require('express')
 const userController=require('../controller/user');
 const categoryController=require('../controller/category');
+const productController=require('../controller/product');
 const router = express.Router();
 
 router.get('/api/user/',userController.getUsers);
@@ -16,4 +17,10 @@ router.post('/api/category/',categoryController.createCategory);
 router.delete('/api/category/:id',categoryController.deleteCategory);
 router.put('/api/category/:id',categoryController.updateCategory)
 
+
+router.get('/api/product/',productController.getProducts);
+router.get('/api/product/:id',productController.getOneProduct);
+router.post('/api/product/',productController.createProduct);
+router.delete('/api/product/:id',productController.deleteProduct);
+//router.put('/api/product/:id',productController.updateProduct)
 module.exports=router;
