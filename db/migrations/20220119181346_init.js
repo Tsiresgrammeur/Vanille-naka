@@ -16,7 +16,15 @@ exports.up = function(knex) {
   }) 
     .createTable('category', (table) => {
       table.increments('id');
-      table.string('category_name');
+      table.string('category_name').notNullable().unique();
+    })
+    .createTable('product', (table) => {
+      table.increments('id');
+      table.string('product_name');
+      table.string('description', 400);
+      table.integer('price');
+      table.integer('category_id');
+      table.foreign('category_id').references('category.id').onDelete('CASCADE').onUpdate('CASCADE');
     })
     .createTable('sale', (table) => {
       table.increments('id');
@@ -36,14 +44,6 @@ exports.up = function(knex) {
       table.integer('product_id')
       table.foreign('product_id').references('product.id').onDelete('CASCADE').onUpdate('CASCADE');
     })
-    .createTable('product', (table) => {
-      table.increments('id');
-      table.string('product_name');
-      table.string('description', 400);
-      table.integer('price');
-      table.integer('category_id');
-      table.foreign('category_id').references('category.id').onDelete('CASCADE').onUpdate('CASCADE');
-    })
 };
 
 /**
@@ -53,8 +53,8 @@ exports.up = function(knex) {
 exports.down = function(knex) {
   return knex.schema 
            .dropTable('user')
-           .dropTable('product')
-           .dropTable('category')
            .dropTable('sale')
-           .dropTable('stock_sheet');
+           .dropTable('stock_sheet')
+           .dropTable('category')
+           .dropTable('product');
 };
