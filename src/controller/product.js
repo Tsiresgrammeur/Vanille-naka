@@ -17,7 +17,6 @@ class productController {
   }
   
   async createProduct(req,res) {
-    console.log('mety')
     try {
       const id = await productService.createProduct(req.body);
       if(id)
