@@ -4,14 +4,26 @@ class UserController {
   async getUsers(req,res)
   {
     try{
-      const numMat = await userService.getUsers();
-      res.status(201).json(numMat);
+      const users = await userService.getUsers();
+      res.status(201).json(users);
     }
 
     catch(err){
       console.error(err);
     }
 
+  }
+
+  async getOneUser(req, res)
+  {
+    try{
+      const user = await userService.getOneUser(req.params.id);
+      res.status(201).json(user);
+    }
+
+    catch(err){
+      console.error(err);
+    }
   }
 
   async createUser(req,res) {

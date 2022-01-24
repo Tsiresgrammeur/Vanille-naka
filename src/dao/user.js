@@ -9,6 +9,11 @@ class userDAO {
     return await db.select().table('user');
   }
 
+  async getOneUser(id)
+  {
+    return await db('user').where('id',id);
+  }
+
   async createUser(first_name, last_name,email, password, address,country, role, numberPhone)
   {
     const hashed = await bcrypt.hash(password, saltRounds);

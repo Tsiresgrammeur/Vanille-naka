@@ -6,10 +6,15 @@ class UserService
   {
     return userDAO.getUsers();
   }
+
+  getOneUser(id)
+  {
+    return userDAO.getOneUser(id);
+  }
   async createUser(user)
   {
-    const { firstName,lastName,email,password,address,country,role,numberPhone} = user;
-    return await userDAO.createUser(firstName,lastName,email,password,address,country,role,numberPhone);
+    const { first_name,last_name,email,password,address,country,role,numberPhone} = user;
+    return await userDAO.createUser(first_name,last_name,email,password,address,country,role,numberPhone);
   }
 
   deleteUser(idUser)
@@ -19,8 +24,8 @@ class UserService
 
   updateUser(id,user)
   {
-    const { firstName,lastName,email,password,address,country,role,numberPhone} = user;
-    return userDAO.updateUser(id,firstName,lastName,email,password,address,country,role,numberPhone);
+    const { first_name,lastName,email,password,address,country,role,numberPhone} = user;
+    return userDAO.updateUser(id,first_name,last_name,email,password,address,country,role,numberPhone);
   }
 }
 
