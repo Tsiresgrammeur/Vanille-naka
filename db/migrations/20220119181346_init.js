@@ -20,7 +20,7 @@ exports.up = function(knex) {
     })
     .createTable('product', (table) => {
       table.increments('id');
-      table.string('name');
+      table.string('product_name');
       table.string('description', 400);
       table.float('price');
       table.integer('category_id');

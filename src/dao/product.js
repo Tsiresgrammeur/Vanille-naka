@@ -11,16 +11,6 @@ class productDAO {
 
   }
 
-  async getProductFiltered(index)
-  {
-    return await db('product').where('category_id',index);
-  }
-
-  async getOneProduct(id)
-  {
-    return await db('product').where('id',id).first();
-  }
-
   async createProduct(product_name,description,price,category_id)
   {
     const [id] = await db('product').insert({

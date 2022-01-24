@@ -7,11 +7,6 @@ class ProductService
     return await productDAO.getProducts(index);
   }
 
-  async getOneProduct(id)
-  {
-    return await productDAO.getOneProduct(id);
-  }
-
   async createProduct(product)
   {
     const {product_name,description,price,category_id} = product;
@@ -23,8 +18,9 @@ class ProductService
     return productDAO.deleteProduct(id);
   }
 
-  updateProduct(id,product_name,description,price,category_id)
+  updateProduct(id,product)
   {
+    const {product_name,description,price,category_id} = product;
     return productDAO.updateProduct(id,product_name,description,price,category_id);
   }
 }
