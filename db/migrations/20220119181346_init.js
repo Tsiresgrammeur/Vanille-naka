@@ -38,7 +38,7 @@ exports.up = function(knex) {
     })
     .createTable('stock_sheet', (table) => {
       table.increments('id');
-      table.string('sheet_date');
+      table.date('sheet_date');
       table.string('operation');
       table.integer('quantity');
       table.integer('product_id')
@@ -52,9 +52,9 @@ exports.up = function(knex) {
  */
 exports.down = function(knex) {
   return knex.schema 
-           .dropTable('user')
            .dropTable('sale')
            .dropTable('stock_sheet')
+           .dropTable('product')
            .dropTable('category')
-           .dropTable('product');
+           .dropTable('user');
 };

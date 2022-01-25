@@ -3,6 +3,7 @@ const userController=require('../controller/user');
 const categoryController=require('../controller/category');
 const productController=require('../controller/product');
 const saleController=require('../controller/sale');
+const sheetController=require('../controller/stock_sheet');
 const router = express.Router();
 
 router.get('/api/user/',userController.getUsers);
@@ -28,4 +29,11 @@ router.get('/api/sale/',saleController.getSales);
 router.post('/api/sale/',saleController.createSale);
 router.delete('/api/sale/:id',saleController.deleteSale);
 router.put('/api/sale/:id',saleController.updateSale)
+
+router.get('/api/sheet/',sheetController.getSheets);
+router.post('/api/sheet/',sheetController.createSheet);
+router.delete('/api/sheet/:id',sheetController.deleteSheet);
+router.put('/api/sheet/:id',sheetController.updateSheet)
+
+
 module.exports=router;
