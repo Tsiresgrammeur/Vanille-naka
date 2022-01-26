@@ -14,7 +14,6 @@ class categoryDAO {
 
   async createCategory(category_name)
   {
-    console.log(category_name)
     const [id] = await db('category').insert({
       category_name: category_name
     }).returning('id');
