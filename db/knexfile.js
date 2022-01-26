@@ -1,4 +1,7 @@
 // Update with your config settings.
+var types = require('pg').types;
+types.setTypeParser(1082, val => val);
+
 
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
@@ -10,7 +13,9 @@ module.exports = {
     connection: {
       database: 'vanille_naka',
       user:     'postgres',
-      password: ''
+      password: '',
+      timezone: 'UTC',
+      dateString:true
     },
     pool: {
       min: 2,
@@ -26,7 +31,9 @@ module.exports = {
     connection: {
       database: 'vanille_naka',
       user:     'postgres',
-      password: ''
+      password: '',
+      timezone: 'UTC',
+      dateString:true
     },
     pool: {
       min: 2,

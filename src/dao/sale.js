@@ -1,11 +1,12 @@
 const db= require('../../db/db');
+//const dateFormat= require('dateFormat');
 
 class saleDAO {
 
   async getSales()
   {
     return await db.select(
-      'sale.id','user.first_name',
+      'sale.id','user.id','user.first_name',
       'user.last_name','user.email',
       'user.address','user.country',
       'user.numberPhone','product.product_name','sale_date','quantity').
@@ -29,6 +30,7 @@ class saleDAO {
 
   async createSale(user_id, product_id, sale_date,quantity,status)
   {
+    //const date_formated=new Date(sale_date).toIsoString().replace('T',)
     const [id] = await db('sale').insert({
       user_id,
       product_id,
