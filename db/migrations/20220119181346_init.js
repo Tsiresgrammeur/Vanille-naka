@@ -24,6 +24,7 @@ exports.up = function(knex) {
       table.string('description', 400);
       table.float('price');
       table.integer('category_id');
+      table.integer('quantity');
       table.foreign('category_id').references('category.id').onDelete('CASCADE').onUpdate('CASCADE');
     })
     .createTable('sale', (table) => {
