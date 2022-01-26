@@ -14,6 +14,19 @@ class saleController {
     }
 
   }
+
+  async getSalesFiltered(req,res)
+  {
+    try{
+      const sales = await saleService.getSalesFiltered(req.body);
+      res.status(201).json(sales);
+    }
+
+    catch(err){
+      console.error(err);
+    }
+
+  }
   
   async createSale(req,res) {
     try {

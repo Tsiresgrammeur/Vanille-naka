@@ -41,9 +41,13 @@ exports.up = function(knex) {
       table.date('sheet_date');
       table.string('operation');
       table.integer('quantity');
-      table.integer('product_id')
+      table.integer('product_id');
       table.foreign('product_id').references('product.id').onDelete('CASCADE').onUpdate('CASCADE');
     })
+    .createTable('cart', (table) => {
+      table.increments('id');
+      table.json('order');
+    });
 };
 
 /**
@@ -56,5 +60,6 @@ exports.down = function(knex) {
            .dropTable('stock_sheet')
            .dropTable('product')
            .dropTable('category')
-           .dropTable('user');
+           .dropTable('user')
+           .dropTable('cart');
 };

@@ -12,6 +12,14 @@ class SaleService
     return await saleDAO.getOneSale(id);
   }
 
+
+  async getSalesFiltered(criteria)
+  {
+    console.log('bogod')
+    const { firstDate, secondDate } = criteria;
+    return await saleDAO.getSalesFiltered(firstDate, secondDate);
+  }
+
   async createSale(sale)
   {
     const {user_id,product_id,sale_date,quantity,status} = sale;
