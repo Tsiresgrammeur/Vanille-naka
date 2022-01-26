@@ -4,7 +4,7 @@ const categoryController=require('../controller/category');
 const productController=require('../controller/product');
 const saleController=require('../controller/sale');
 const sheetController=require('../controller/stock_sheet');
-//const cartController=require('../controller/cart');
+const cartController=require('../controller/cart');
 const router = express.Router();
 
 router.get('/api/user/',userController.getUsers);
