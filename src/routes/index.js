@@ -37,10 +37,10 @@ router.post('/api/sheet/',sheetController.createSheet);
 router.delete('/api/sheet/:id',sheetController.deleteSheet);
 router.put('/api/sheet/:id',sheetController.updateSheet)
 
-//router.get('/api/cart/',cartController.getCarts);
-//router.get('/api/cart/:id',cartController.getOneCart);
-//router.post('/api/cart/',cartController.createCart);
-//router.delete('/api/cart/:id',cartController.deleteCart);
-//router.put('/api/cart/:id',cartController.updateCart)
+router.get('/api/cart/',cartController.getCarts);
+router.get('/api/cart/:id',cartController.getOneCart);
+router.post('/api/cart/',cartController.createCart);
+router.delete('/api/cart/:id',cartController.deleteCart);
+router.put('/api/cart/:id',cartController.updateCart)
 
 module.exports=router;
