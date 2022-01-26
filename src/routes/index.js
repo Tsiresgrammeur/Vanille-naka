@@ -26,13 +26,12 @@ router.post('/api/product/',productController.createProduct);
 router.delete('/api/product/:id',productController.deleteProduct);
 router.put('/api/product/:id',productController.updateProduct)
 
-router.get('/api/sale/',saleController.getSales);
 router.post('/api/sale/filter/',saleController.getSalesFiltered);
 router.post('/api/sale/',saleController.createSale);
 router.delete('/api/sale/:id',saleController.deleteSale);
 router.put('/api/sale/:id',saleController.updateSale)
 
-router.get('/api/sheet/',sheetController.getSheets);
+router.post('/api/sheet/filter/',sheetController.getSheets);
 router.post('/api/sheet/',sheetController.createSheet);
 router.delete('/api/sheet/:id',sheetController.deleteSheet);
 router.put('/api/sheet/:id',sheetController.updateSheet)

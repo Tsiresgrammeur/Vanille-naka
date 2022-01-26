@@ -4,7 +4,8 @@ class SheetService
 {
   async getSheets(index)
   {
-    return await sheetDAO.getSheets(index);
+    const { operation } =index;
+    return await sheetDAO.getSheets(operation);
   }
 
   async createSheet(sheet)

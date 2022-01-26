@@ -5,7 +5,7 @@ class sheetController {
   async getSheets(req,res)
   {
     try{
-      const sheets = await sheetService.getSheets(req.params.index);
+      const sheets = await sheetService.getSheets(req.body);
       res.status(201).json(sheets);
     }
 

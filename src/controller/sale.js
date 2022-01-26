@@ -2,19 +2,6 @@ const saleService = require('../service/sale');
 
 class saleController {
 
-  async getSales(req,res)
-  {
-    try{
-      const sales = await saleService.getSales(req.params.index);
-      res.status(201).json(sales);
-    }
-
-    catch(err){
-      console.error(err);
-    }
-
-  }
-
   async getSalesFiltered(req,res)
   {
     try{

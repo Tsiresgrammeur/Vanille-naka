@@ -3,8 +3,20 @@ const db= require('../../db/db');
 
 class saleDAO {
 
-  async getSales()
+  async getSalesFiltered(firstDate, secondDate)
   {
+    if(firstDate && secondDate)
+    {
+      return await db.select(
+        'sale.id','user.first_name',
+        'user.last_name','user.email',
+        'user.address','user.country',
+        'user.numberPhone','product.product_name').
+        from('sale')
+        .innerJoin('user','user_id','user.id')
+        .innerJoin('product','product_id','product.id')
+        .whereBetween('sale_date',[firstDate, secondDate]);
+    }
     return await db.select(
       'sale.id','user_id','user.first_name',
       'user.last_name','user.email',
@@ -13,19 +25,7 @@ class saleDAO {
       from('sale')
       .innerJoin('user','user_id','user.id')
       .innerJoin('product','product_id','product.id');
-  }
 
-  async getSalesFiltered(firstDate, secondDate)
-  {
-    return await db.select(
-      'sale.id','user.first_name',
-      'user.last_name','user.email',
-      'user.address','user.country',
-      'user.numberPhone','product.product_name').
-      from('sale')
-      .innerJoin('user','user_id','user.id')
-      .innerJoin('product','product_id','product.id')
-      .whereBetween('sale_date',[firstDate, secondDate]);
   }
 
   async createSale(user_id, product_id, sale_date,quantity,status)

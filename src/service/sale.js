@@ -2,20 +2,8 @@ const saleDAO = require('../dao/sale');
 
 class SaleService 
 {
-  async getSales(index)
-  {
-    return await saleDAO.getSales(index);
-  }
-
-  async getOneSale(id)
-  {
-    return await saleDAO.getOneSale(id);
-  }
-
-
   async getSalesFiltered(criteria)
   {
-    console.log('bogod')
     const { firstDate, secondDate } = criteria;
     return await saleDAO.getSalesFiltered(firstDate, secondDate);
   }
