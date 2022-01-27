@@ -12,10 +12,12 @@ class cartDAO {
     return await db('cart').where('id',id).first();
   }
 
-  async createCart(order)
+  async createCart(order,user_id,status)
   {
     const [id] = await db('cart').insert({
-      order: JSON.stringify(order)
+      order: JSON.stringify(order),
+      user_id,
+      status
     }).returning('id');
 
     return id;
@@ -26,10 +28,12 @@ class cartDAO {
    return await db('cart').where('id',id).del();
   }
 
-  async updateCart(id,order)
+  async updateCart(id,order,user_id, status)
   {
      return db('cart').where({ id: id}).update({
-      order: JSON.stringify(order)
+      order: JSON.stringify(order),
+      user_id,
+      status
     });
   }
 

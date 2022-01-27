@@ -12,9 +12,10 @@ class CartService
     return await cartDAO.getOneCart(id);
   }
 
-  async createCart(order)
+  async createCart(cart)
   {
-    return await cartDAO.createCart(order);
+    const { order, user_id, status }= cart;
+    return await cartDAO.createCart(order, user_id, status);
   }
 
   deleteCart(id)
@@ -22,9 +23,10 @@ class CartService
     return cartDAO.deleteCart(id);
   }
 
-  updateCart(id,order)
+  updateCart(id,cart)
   {
-    return cartDAO.updateCart(id,order);
+    const { order, user_id, status }= cart;
+    return cartDAO.updateCart(id,cart);
   }
 }
 
