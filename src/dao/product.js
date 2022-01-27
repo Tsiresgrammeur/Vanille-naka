@@ -11,13 +11,19 @@ class productDAO {
 
   }
 
-  async createProduct(product_name,description,price,category_id)
+  async getOneProduct(id)
+  {
+   return await db('product').where('id',id).first();
+  }
+
+  async createProduct(product_name,description,price,category_id,quantity)
   {
     const [id] = await db('product').insert({
       product_name,
       description,
       price,
-      category_id
+      category_id,
+      quantity
     }).returning('id');
 
     return id;
@@ -28,13 +34,14 @@ class productDAO {
    return await db('product').where('id',id).del();
   }
 
-  async updateProduct(id,product_name,description,price,category_id)
+  async updateProduct(id,product_name,description,price,category_id,quantity)
   {
      return db('product').where({ id: id}).update({
       product_name,
       description,
       price,
-      category_id
+      category_id,
+      quantity
     });
   }
 

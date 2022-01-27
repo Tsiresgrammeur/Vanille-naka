@@ -15,7 +15,7 @@ class productController {
     }
 
   }
-  
+
   async createProduct(req,res) {
     try {
       const id = await productService.createProduct(req.body);

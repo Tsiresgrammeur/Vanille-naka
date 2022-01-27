@@ -1,4 +1,5 @@
 const db= require('../../db/db');
+const productService= require('../service/product');
 
 class sheetDAO {
 
@@ -6,7 +7,7 @@ class sheetDAO {
   {
     if(operation)
       return await db.select(
-        'stock_sheet.id'
+        'stock_sheet.id',
         'sheet_date','operation',
         'quantity','product_id',
         'product.product_name'
@@ -16,7 +17,7 @@ class sheetDAO {
         )
         .where('operation','=',operation);
       return await db.select(
-        'stock_sheet.id'
+        'stock_sheet.id',
         'sheet_date','operation',
         'quantity','product_id',
         'product.product_name'
@@ -35,6 +36,21 @@ class sheetDAO {
       quantity,
       product_id
     }).returning('id');
+
+    const productGot= await productService.getOneProduct(product_id);
+    const {product_name,description,price,category_id} = productGot;
+    const productGot_id = productGot.id;
+    if(operation == 'in')
+    {
+      var quantity_updated = productGot.quantity+quantity;
+    } 
+    else(operation == 'out')
+    {
+      var quantity_updated = productGot.quantity-quantity;
+    }
+    productGot.quantity= quantity_updated;
+    const updated = await productService.updateProduct(productGot_id,productGot);
+
 
     return id;
   }

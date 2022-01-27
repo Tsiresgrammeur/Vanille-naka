@@ -48,6 +48,8 @@ exports.up = function(knex) {
     .createTable('cart', (table) => {
       table.increments('id');
       table.json('order');
+      table.integer('user_id');
+      table.string('status');
     });
 };
 
