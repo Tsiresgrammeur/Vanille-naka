@@ -11,7 +11,7 @@ class userDAO {
 
   async getOneUser(id)
   {
-    return await db('user').where('id',id);
+    return await db('user').where('id',id).orWhere('email',id);
   }
 
   async createUser(first_name, last_name,email, password, address,country, role, numberPhone)

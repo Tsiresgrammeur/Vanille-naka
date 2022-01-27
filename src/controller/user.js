@@ -1,6 +1,23 @@
 const userService = require('../service/user');
 
 class UserController {
+  //async authenticate(req,res, next)
+  //{
+  //  var user= await userService.getOneUser(req.body.email)
+  //  if(!user)
+  //  {
+  //    res.status(401).json({
+  //      error: "No user with that email"
+  //    })
+  //  }
+
+  //  else
+  //  {
+  //    const 
+  //  }
+
+
+  //}
   async getUsers(req,res)
   {
     try{
@@ -27,13 +44,22 @@ class UserController {
   }
 
   async createUser(req,res) {
-    try {
-      const id = await userService.createUser(req.body);
-      if(id)
-      res.status(201).json({success: true}); 
+    const right_format=validateEmail(req.body.email);
+
+    if(right_format)
+    {
+      try {
+        const id = await userService.createUser(req.body);
+        if(id)
+          res.status(201).json({success: true}); 
+      }
+      catch(err){
+        console.error(err);
+      }
     }
-    catch(err){
-      console.error(err);
+    else
+    {
+     res.status(409).json({ success:false, message: 'email format not validated' }) 
     }
   }
 
@@ -65,6 +91,12 @@ class UserController {
 
 
 
+}
+
+ function validateEmail(elementValue) {
+  var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  // console.log(emailPattern.test(elementValue));
+  return emailPattern.test(elementValue);
 }
 
 module.exports = new UserController();
