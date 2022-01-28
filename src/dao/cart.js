@@ -1,4 +1,5 @@
 const db= require('../../db/db');
+const saleDAO = require('../dao/sale');
 
 class cartDAO {
 
@@ -17,13 +18,14 @@ class cartDAO {
     const [id] = await db('cart').insert({
       order: JSON.stringify(order),
       user_id,
-      status
+      status,
+      cart_date: new Date()
     }).returning('id');
 
-    //order.foreach((value) => {
-    //  const [sale_id]= await createSale(user_id, value.product_id)
-
-    //})
+    console.log(order[0])
+    order.forEach((value) => {
+      const sale_id= saleDAO.createSale(user_id, value.product,new Date(), value.quantity);
+    })
     return id;
   }
 

@@ -42,11 +42,11 @@ class sheetDAO {
     const productGot_id = productGot.id;
     if(operation == 'in')
     {
-      var quantity_updated = productGot.quantity+quantity;
+      var quantity_updated = productGot.quantity-quantity;
     } 
     else(operation == 'out')
     {
-      var quantity_updated = productGot.quantity-quantity;
+      var quantity_updated = productGot.quantity+quantity;
     }
     productGot.quantity= quantity_updated;
     const updated = await productService.updateProduct(productGot_id,productGot);
