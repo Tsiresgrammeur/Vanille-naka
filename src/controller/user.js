@@ -1,23 +1,36 @@
 const userService = require('../service/user');
+const SECRET='any secrets';
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 class UserController {
-  //async authenticate(req,res, next)
-  //{
-  //  var user= await userService.getOneUser(req.body.email)
-  //  if(!user)
-  //  {
-  //    res.status(401).json({
-  //      error: "No user with that email"
-  //    })
-  //  }
+  async authenticate(req,res)
+  {
+    var user= await userService.getOneUser(req.body.email)
+    if(!user)
+    {
+      res.status(401).json({
+        error: "No user with that email"
+      })
+    }
 
-  //  else
-  //  {
-  //    const 
-  //  }
+    else
+    {
+      const validPassword= await bcrypt.compare(req.body.password, user.password)
+        if(validPassword)
+        {
+          return jwt.sign(user, SECRET, (error, token) => {
+            res.status(200).json({token})
+          })
+        }
+        else
+        {
+          return res.status(401).json({success: false,message:'password does not match'})
+        }
+      }
 
+  }
 
-  //}
   async getUsers(req,res)
   {
     try{

@@ -9,7 +9,7 @@ class sheetDAO {
       return await db.select(
         'stock_sheet.id',
         'sheet_date','operation',
-        'quantity','product_id',
+        'stock_sheet.quantity','product_id',
         'product.product_name'
       )
         .from('stock_sheet').innerJoin(
@@ -19,7 +19,7 @@ class sheetDAO {
       return await db.select(
         'stock_sheet.id',
         'sheet_date','operation',
-        'quantity','product_id',
+        'stock_sheet.quantity','product_id',
         'product.product_name'
       )
         .from('stock_sheet').innerJoin(

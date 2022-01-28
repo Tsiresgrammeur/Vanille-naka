@@ -11,7 +11,7 @@ class saleDAO {
         'sale.id','user_id','user.first_name',
         'user.last_name','user.email',
         'user.address','user.country',
-        'user.numberPhone','product_id','product.product_name','price','sale_date','quantity').
+        'user.numberPhone','product_id','product.product_name','price','sale_date','sale.quantity').
         from('sale')
         .innerJoin('user','user_id','user.id')
         .innerJoin('product','product_id','product.id')
@@ -21,7 +21,7 @@ class saleDAO {
       'sale.id','user_id','user.first_name',
       'user.last_name','user.email',
       'user.address','user.country',
-      'user.numberPhone','product_id','product.product_name','price','sale_date','quantity').
+      'user.numberPhone','product_id','product.product_name','price','sale_date','sale.quantity').
       from('sale')
       .innerJoin('user','user_id','user.id')
       .innerJoin('product','product_id','product.id');

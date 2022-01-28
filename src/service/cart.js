@@ -26,7 +26,7 @@ class CartService
   updateCart(id,cart)
   {
     const { order, user_id, status }= cart;
-    return cartDAO.updateCart(id,cart);
+    return cartDAO.updateCart(id,order, user_id, status);
   }
 }
 
