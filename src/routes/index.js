@@ -23,6 +23,7 @@ router.put('/api/category/:id',categoryController.updateCategory)
 
 
 router.get('/api/product/:index?',productController.getProducts);
+router.get('/api/product/one/:id',productController.getOneProduct);
 router.post('/api/product/',productController.createProduct);
 router.delete('/api/product/:id',productController.deleteProduct);
 router.put('/api/product/:id',productController.updateProduct)

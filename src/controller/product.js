@@ -16,6 +16,19 @@ class productController {
 
   }
 
+  async getOneProduct(req,res)
+  {
+    try{
+      const product = await productService.getOneProduct(req.params.id);
+      res.status(201).json(product);
+    }
+
+    catch(err){
+      console.error(err);
+    }
+
+  }
+
   async createProduct(req,res) {
     try {
       const id = await productService.createProduct(req.body);

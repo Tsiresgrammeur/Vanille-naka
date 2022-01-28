@@ -9,10 +9,10 @@ exports.up = function(knex) {
     table.string('last_name');
     table.string('email').notNullable().unique();
     table.string('password');
-    table.string('address');
-    table.string('country');
+    table.string('address').notNullable();
+    table.string('country').notNullable();
     table.string('role');
-    table.string('numberPhone');
+    table.string('numberPhone').notNullable();
   }) 
     .createTable('category', (table) => {
       table.increments('id');
@@ -33,7 +33,6 @@ exports.up = function(knex) {
       table.integer('product_id');
       table.date('sale_date');
       table.integer('quantity');
-      table.string('status');
       table.foreign('product_id').references('product.id').onDelete('CASCADE').onUpdate('CASCADE');
       table.foreign('user_id').references('user.id').onDelete('CASCADE').onUpdate('CASCADE');
     })
@@ -50,6 +49,7 @@ exports.up = function(knex) {
       table.json('order');
       table.integer('user_id');
       table.string('status');
+      table.date('cart_date');
     });
 };
 

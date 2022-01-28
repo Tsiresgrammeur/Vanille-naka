@@ -10,8 +10,8 @@ class SaleService
 
   async createSale(sale)
   {
-    const {user_id,product_id,sale_date,quantity,status} = sale;
-    return await saleDAO.createSale(user_id,product_id,sale_date,quantity,status);
+    const {user_id,product_id,sale_date,quantity} = sale;
+    return await saleDAO.createSale(user_id,product_id,sale_date,quantity);
   }
 
   deleteSale(id)
@@ -21,8 +21,8 @@ class SaleService
 
   updateSale(id,sale)
   {
-    const { user_id,product_id,sale_date,quantity,status } = sale;
-    return saleDAO.updateSale(id,user_id,product_id,sale_date,quantity,status);
+    const { user_id,product_id,sale_date,quantity } = sale;
+    return saleDAO.updateSale(id,user_id,product_id,sale_date,quantity);
   }
 }
 

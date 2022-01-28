@@ -20,6 +20,10 @@ class cartDAO {
       status
     }).returning('id');
 
+    //order.foreach((value) => {
+    //  const [sale_id]= await createSale(user_id, value.product_id)
+
+    //})
     return id;
   }
 

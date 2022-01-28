@@ -28,15 +28,14 @@ class saleDAO {
 
   }
 
-  async createSale(user_id, product_id, sale_date,quantity,status)
+  async createSale(user_id, product_id, sale_date,quantity)
   {
     //const date_formated=new Date(sale_date).toIsoString().replace('T',)
     const [id] = await db('sale').insert({
       user_id,
       product_id,
       sale_date,
-      quantity,
-      status
+      quantity
     }).returning('id');
 
     return id;
@@ -47,14 +46,13 @@ class saleDAO {
    return await db('sale').where('id',id).del();
   }
 
-  async updateSale(id,user_id, product_id, sale_date,quantity,status)
+  async updateSale(id,user_id, product_id, sale_date,quantity)
   {
      return db('sale').where({ id: id}).update({
       user_id,
       product_id,
       sale_date,
-      quantity,
-      status
+      quantity
     });
   }
 
