@@ -22,7 +22,9 @@ class cartDAO {
       cart_date: new Date()
     }).returning('id');
 
-    console.log(order[0])
+
+    console.log(typeof(order))
+
     order.forEach((value) => {
       const sale_id= saleDAO.createSale(user_id, value.product_id,new Date(), value.quantity);
     })
