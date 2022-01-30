@@ -3,14 +3,16 @@ const saleDAO = require('../dao/sale');
 
 class cartDAO {
 
-  async getCarts()
+  async getCarts(id)
   {
+    if(id)
+    return await db('cart').where('id',id).first();
     return await db.select().table('cart');
   }
 
-  async getOneCart(id)
+  async getCartUser(user_id)
   {
-    return await db('cart').where('id',id).first();
+    return await db('cart').where('user_id',user_id);
   }
 
   async createCart(order,user_id,status)

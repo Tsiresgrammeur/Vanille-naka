@@ -15,10 +15,10 @@ class cartController {
 
   }
   
-  async getOneCart(req,res)
+  async getCartUser(req,res)
   {
     try{
-      const cart = await cartService.getOneCart(req.params.id);
+      const cart = await cartService.getCartUser(req.params.user_id);
       res.status(201).json(cart);
     }
 

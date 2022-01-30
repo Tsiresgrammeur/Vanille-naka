@@ -38,8 +38,8 @@ router.post('/api/sheet/',sheetController.createSheet);
 router.delete('/api/sheet/:id',sheetController.deleteSheet);
 router.put('/api/sheet/:id',sheetController.updateSheet)
 
-router.get('/api/cart/',cartController.getCarts);
-router.get('/api/cart/:id',cartController.getOneCart);
+router.get('/api/cart/:id?',cartController.getCarts);
+router.get('/api/cart/filter/:user_id',cartController.getCartUser);
 router.post('/api/cart/',cartController.createCart);
 router.delete('/api/cart/:id',cartController.deleteCart);
 router.put('/api/cart/:id',cartController.updateCart)

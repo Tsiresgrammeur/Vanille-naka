@@ -2,14 +2,14 @@ const cartDAO = require('../dao/cart');
 
 class CartService 
 {
-  async getCarts()
+  async getCarts(id)
   {
-    return await cartDAO.getCarts();
+    return await cartDAO.getCarts(id);
   }
 
-  async getOneCart(id)
+  async getCartUser(user_id)
   {
-    return await cartDAO.getOneCart(id);
+    return await cartDAO.getCartUser(user_id);
   }
 
   async createCart(cart)
