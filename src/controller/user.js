@@ -67,7 +67,7 @@ class UserController {
     const validPassword= req.body.code == generatedCode;
     if(validPassword)
     {
-      user.password = req.body.newPassword;
+      user.password = req.body.new_password;
       try{
         const id = await userService.updateUser(user.id,user);
         if(id)
