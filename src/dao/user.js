@@ -42,17 +42,32 @@ class userDAO {
 
   async updateUser(id, first_name, last_name,email, password, address,country, role, numberPhone)
   {
-     const hashed = await bcrypt.hash(password, saltRounds);
-     return db('user').where({ id: id}).update({
-      first_name,
-      last_name,
-      email,
-      password: hashed,
-      address,
-      country,
-      role,
-      numberPhone
-    });
+    if(password)
+    {
+      const hashed = await bcrypt.hash(password, saltRounds);
+      return db('user').where({ id: id}).update({
+        first_name,
+        last_name,
+        email,
+        password: hashed,
+        address,
+        country,
+        role,
+        numberPhone
+      });
+    }
+    else
+    {
+      return db('user').where({ id: id}).update({
+        first_name,
+        last_name,
+        email,
+        address,
+        country,
+        role,
+        numberPhone
+      });
+    }
   }
 
 }

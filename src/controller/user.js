@@ -58,21 +58,28 @@ class UserController {
 
   async createUser(req,res) {
     const right_format=validateEmail(req.body.email);
-
-    if(right_format)
+    if(req.body.last_name != "")
     {
-      try {
-        const id = await userService.createUser(req.body);
-        if(id)
-          res.status(201).json({success: true}); 
+
+      if(right_format)
+      {
+        try {
+          const id = await userService.createUser(req.body);
+          if(id)
+            res.status(201).json({success: true}); 
+        }
+        catch(err){
+          console.error(err);
+        }
       }
-      catch(err){
-        console.error(err);
+      else
+      {
+        res.status(409).json({ success:false, message: 'email format not validated' }) 
       }
     }
     else
     {
-     res.status(409).json({ success:false, message: 'email format not validated' }) 
+       res.status(409).json({ success:false, message: 'Last name must not be empty' }) 
     }
   }
 
