@@ -55,7 +55,7 @@ class UserController {
       if (error) {
         console.log(error);
       } else {
-        console.log('Email sent: ' + info.response);
+        res.status(201).json('Email sent: ' + info.response);
       }
     });
   }
