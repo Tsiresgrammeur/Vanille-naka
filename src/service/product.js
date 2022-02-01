@@ -20,26 +20,80 @@ class ProductService
 
   async createProduct(product)
   {
-    const {product_name,description,price,category_id,quantity, image_1} = product;
+    const {product_name,description,price,category_id,quantity, image_1,image_2,image_3} = product;
     const product_id=await productDAO.createProduct(product_name,description,price,category_id,quantity);
-    var image_1_created=path_image+"/img_"+product_id.id+".jpg";
-    console.log(image_1)
+    let image_name;
+    let buff;
+    let i=1;
+
     if(product_id)
     {
-      let buff=Buffer.from(image_1, 'base64');
-      fs.writeFileSync(image_1_created,buff)
+      if(image_1.split(',')[1] != undefined)
+      {
+        buff=Buffer.from(image_1.split(',')[1], 'base64');
+        image_name=path_image+"/img_"+product_id.id+"_"+i+".jpeg"
+        fs.writeFileSync(image_name,buff);
+      }
+      if(image_2.split(',')[1] != undefined)
+      {
+        buff=Buffer.from(image_2.split(',')[1], 'base64');
+        i=2;
+        image_name=path_image+"/img_"+product_id.id+"_"+i+".jpeg"
+        fs.writeFileSync(image_name,buff)
+      }
+      if(image_3.split(',')[1] != undefined)
+      {
+        buff=Buffer.from(image_3.split(',')[1], 'base64');
+        i=3;
+        image_name=path_image+"/img_"+product_id.id+"_"+i+".jpeg"
+        fs.writeFileSync(image_name,buff)
+      }
     }
     return product_id;
   }
 
   deleteProduct(id)
   {
-    return productDAO.deleteProduct(id);
+    let image_name;
+    const delete_status= productDAO.deleteProduct(id);
+    if(delete_status)
+    {
+      for(let i=1; i < 4; i++)
+      {
+        image_name=path_image+"/img_"+id+"_"+i+".jpeg"
+        fs.unlinkSync(image_name);
+      }
+    }
+
+    return delete_status;
   }
 
   updateProduct(id,product)
   {
-    const {product_name,description,price,category_id,quantity} = product;
+    let image_name;
+    let buff;
+    let i=1;
+    const {product_name,description,price,category_id,quantity,image_1,image_2,image_3} = product;
+    if(image_1.split(',')[1] != undefined)
+    {
+      buff=Buffer.from(image_1.split(',')[1], 'base64');
+      image_name=path_image+"/img_"+id+"_"+i+".jpeg"
+      fs.writeFileSync(image_name,buff);
+    }
+    if(image_2.split(',')[1] != undefined)
+    {
+      buff=Buffer.from(image_2.split(',')[1], 'base64');
+      i=2;
+      image_name=path_image+"/img_"+id+"_"+i+".jpeg"
+      fs.writeFileSync(image_name,buff)
+    }
+    if(image_3.split(',')[1] != undefined)
+    {
+      buff=Buffer.from(image_3.split(',')[1], 'base64');
+      i=3;
+      image_name=path_image+"/img_"+id+"_"+i+".jpeg"
+      fs.writeFileSync(image_name,buff)
+    }
     return productDAO.updateProduct(id,product_name,description,price,category_id,quantity);
   }
 }
