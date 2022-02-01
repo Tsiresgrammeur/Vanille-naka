@@ -1,5 +1,5 @@
 const db= require('../../db/db');
-const productService = require('../service/product');
+const sheetService = require('../service/stock_sheet');
 //const dateFormat= require('dateFormat');
 
 class saleDAO {
@@ -38,12 +38,12 @@ class saleDAO {
       sale_date,
       quantity
     }).returning('id');
-    const productGot= await productService.getOneProduct(product_id);
-    const {product_name,description,price,category_id} = productGot;
-    const productGot_id = productGot.id;
-    var quantity_updated = productGot.quantity-quantity;
-    productGot.quantity= quantity_updated;
-    const updated = await productService.updateProduct(productGot_id,productGot);
+    const stock_sheet= {};
+    stock_sheet.sheet_date=new Date();
+    stock_sheet.operation='out';
+    stock_sheet.quantity=quantity;
+    stock_sheet.product_id=product_id;
+    const sheet=sheetService.createSheet(stock_sheet);
 
     return id;
   }
