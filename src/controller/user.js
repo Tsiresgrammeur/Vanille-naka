@@ -2,6 +2,7 @@ const userService = require('../service/user');
 const SECRET='any secrets';
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const nodemailer = require('nodemailer');
 
 class UserController {
   async authenticate(req,res)
@@ -30,6 +31,61 @@ class UserController {
       }
 
   }
+
+
+  async sendPassword(req,res) {
+    const user= await userService.getOneUser(req.body.email);
+    const generatedPassword = user.password.substring(10,19);
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'jeremybuendia29@gmail.com',
+        pass: '1836547290'
+      }
+    });
+
+    var mailOptions = {
+      from: 'jeremybuendia29@gmail.com',
+      to: req.body.email,
+      subject: 'Password recovery',
+      html: '<b>'+generatedPassword+'</b>'
+    };
+
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+  }
+
+  async changePassword(req,res)
+  {
+    const user= await userService.getOneUser(req.body.email);
+    const generatedCode = user.password.substring(10,19);
+    const validPassword= req.body.code == generatedCode;
+    if(validPassword)
+    {
+      user.password = req.body.newPassword;
+      try{
+        const id = await userService.updateUser(user.id,user);
+        if(id)
+          res.status(201).json({success: true});
+      }
+
+      catch(err){
+        console.error(err);
+      }
+
+    }
+    else
+    {
+      res.status(409).json({success: false, message:"The code you enterd is false"});
+    }
+
+  }
+
 
   async getUsers(req,res)
   {

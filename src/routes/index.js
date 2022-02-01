@@ -11,6 +11,8 @@ router.get('/api/user/',userController.getUsers);
 router.get('/api/user/:id',userController.getOneUser);
 router.post('/api/user/',userController.createUser);
 router.post('/api/user/login',userController.authenticate);
+router.post('/api/user/forget_password',userController.sendPassword);
+router.post('/api/user/password',userController.changePassword);
 router.delete('/api/user/:id',userController.deleteUser);
 router.put('/api/user/:id',userController.updateUser)
 
