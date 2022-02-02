@@ -30,6 +30,7 @@ class sheetDAO {
 
   async createSheet(sheet_date, operation, quantity,product_id)
   {
+    var quantity_updated;
     const [id] = await db('stock_sheet').insert({
       sheet_date,
       operation,
@@ -42,11 +43,11 @@ class sheetDAO {
     const productGot_id = productGot.id;
     if(operation == 'in')
     {
-      var quantity_updated = productGot.quantity+quantity;
+      quantity_updated = productGot.quantity + quantity;
     } 
-    else(operation == 'out')
+    else if(operation == 'out')
     {
-      var quantity_updated = productGot.quantity-quantity;
+      quantity_updated = productGot.quantity-quantity;
     }
     productGot.quantity= quantity_updated;
     productGot.image_1="";
