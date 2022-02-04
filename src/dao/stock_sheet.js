@@ -61,7 +61,28 @@ class sheetDAO {
 
   async deleteSheet(id)
   {
-   return await db('stock_sheet').where('id',id).del();
+    const product = await db.select('product_id').from('stock_sheet').where('id',id).first();
+    const productGot= await productService.getOneProduct(product.product_id);
+    const {product_name,description,price,category_id} = productGot;
+    const productGot_id = productGot.id;
+    const sheet_to_delete = await db('stock_sheet').where('id',id).first();
+    let quantity_updated;
+    if(sheet_to_delete.operation == 'in')
+    {
+      quantity_updated = productGot.quantity - sheet_to_delete.quantity;
+    } 
+
+    else if(sheet_to_delete.operation == 'out')
+    {
+      quantity_updated = productGot.quantity + sheet_to_delete.quantity;
+    }
+
+    productGot.quantity= quantity_updated;
+    productGot.image_1="";
+    productGot.image_2="";
+    productGot.image_3="";
+    const updated = await productService.updateProduct(productGot_id,productGot);
+    return await db('stock_sheet').where('id',id).del();
   }
 
   async updateSheet(id,sheet_date, operation, quantity,product_id)

@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 
 class UserController {
+
   async authenticate(req,res)
   {
     var user= await userService.getOneUser(req.body.email)
@@ -112,8 +113,14 @@ class UserController {
     }
   }
 
-  async createUser(req,res) {
-    const right_format=validateEmail(req.body.email);
+  validateEmail(elementValue) {
+    var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    // console.log(emailPattern.test(elementValue));
+    return emailPattern.test(elementValue);
+  }
+
+  createUser = async (req,res) => {
+    const right_format = this.validateEmail(req.body.email);
     if(req.body.last_name != "")
     {
 
@@ -169,10 +176,5 @@ class UserController {
 
 }
 
- function validateEmail(elementValue) {
-  var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  // console.log(emailPattern.test(elementValue));
-  return emailPattern.test(elementValue);
-}
 
 module.exports = new UserController();
