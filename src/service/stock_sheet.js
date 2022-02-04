@@ -8,6 +8,11 @@ class SheetService
     return await sheetDAO.getSheets(operation);
   }
 
+  async getProduct(id)
+  {
+    return await sheetDAO.getProduct(id);
+  }
+
   async createSheet(sheet)
   {
     const {sheet_date, operation, quantity,product_id} = sheet;

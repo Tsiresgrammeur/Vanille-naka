@@ -28,6 +28,12 @@ class sheetDAO {
 
   }
 
+  async getProduct(id)
+  {
+    return await db.select('operation','product_id','quantity').from('stock_sheet').where('product_id', id);
+  }
+
+
   async createSheet(sheet_date, operation, quantity,product_id)
   {
     var quantity_updated;
@@ -38,22 +44,6 @@ class sheetDAO {
       product_id
     }).returning('id');
 
-    const productGot= await productService.getOneProduct(product_id);
-    const {product_name,description,price,category_id} = productGot;
-    const productGot_id = productGot.id;
-    if(operation == 'in')
-    {
-      quantity_updated = productGot.quantity + quantity;
-    } 
-    else if(operation == 'out')
-    {
-      quantity_updated = productGot.quantity-quantity;
-    }
-    productGot.quantity= quantity_updated;
-    productGot.image_1="";
-    productGot.image_2="";
-    productGot.image_3="";
-    const updated = await productService.updateProduct(productGot_id,productGot);
 
 
     return id;
@@ -87,7 +77,12 @@ class sheetDAO {
 
   async updateSheet(id,sheet_date, operation, quantity,product_id)
   {
-     return db('stock_sheet').where({ id: id}).update({
+   // const current_sheet= await db('stock_sheet').where('id',id).first();
+   // if(current_sheet.product_id == product_id)
+   // {
+   //   const product= await productService.getOneProduct(product.product_id);
+   // }
+    return db('stock_sheet').where({ id: id}).update({
       sheet_date,
       operation,
       quantity,

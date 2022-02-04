@@ -15,7 +15,8 @@ class ProductService
 
   async getOneProduct(id)
   {
-    return await productDAO.getOneProduct(id)
+    console.log('ity dia service')
+    return await productDAO.getOneProduct(id);
   }
 
   async createProduct(product)
