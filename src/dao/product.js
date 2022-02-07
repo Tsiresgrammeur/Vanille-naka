@@ -37,10 +37,11 @@ class productDAO {
 
     return products;
 
-  }
+}
 
-async getOneProduct(id)
-{
+
+ getOneProduct = async (id) => {
+  const products = await this.getProducts();
   return await db('product').where('id',id).first();
 }
 

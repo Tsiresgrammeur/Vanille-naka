@@ -44,8 +44,6 @@ class sheetDAO {
       product_id
     }).returning('id');
 
-
-
     return id;
   }
 
