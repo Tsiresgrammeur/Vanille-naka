@@ -2,6 +2,7 @@ const fs=require('fs')
 const express=require('express');
 const bodyparser=require('body-parser');
 const path=require('path');
+const sheetService = require('./stock_sheet');
 var path_image=path.relative('../../','../../public/image/product/');
 
 const productDAO = require('../dao/product');
@@ -10,13 +11,48 @@ class ProductService
 {
   async getProducts(index)
   {
-    return await productDAO.getProducts(index);
+    let totalIn=0,totalOut=0;
+    var sheets;
+    let products = await productDAO.getProducts(index);
+    for(let product of products) {
+      sheets = await sheetService.getProduct(product.id);
+      if(sheets)
+      {
+        sheets.forEach((sheet) => {
+          if(sheet.operation == "in")
+            totalIn += sheet.quantity 
+          else if(sheet.operation == "out")
+            totalOut += sheet.quantity 
+        })
+      }
+      
+      product.quantity = totalIn - totalOut;
+
+      totalIn=0;
+      totalOut = 0;
+    }
+    return products;
   }
 
   async getOneProduct(id)
   {
-    console.log('ity dia service')
-    return await productDAO.getOneProduct(id);
+    let totalIn=0,totalOut=0;
+    var sheets;
+    let product = await productDAO.getOneProduct(id);
+    sheets = await sheetService.getProduct(id);
+    if(sheets)
+    {
+      sheets.forEach((sheet) => {
+        if(sheet.operation == "in")
+          totalIn += sheet.quantity 
+        else if(sheet.operation == "out")
+          totalOut += sheet.quantity 
+      })
+    }
+
+    product.quantity = totalIn - totalOut;
+
+    return product;
   }
 
   async createProduct(product)

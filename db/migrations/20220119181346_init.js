@@ -58,7 +58,7 @@ exports.up = function(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
-  return knex.schema 
+return knex.schema 
            .dropTable('sale')
            .dropTable('stock_sheet')
            .dropTable('product')
