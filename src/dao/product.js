@@ -34,14 +34,13 @@ class productDAO {
   return await db('product').where('id',id).first();
 }
 
-async createProduct(product_name,description,price,category_id,quantity)
+async createProduct(product_name,description,price,category_id)
 {
   const [id] = await db('product').insert({
     product_name,
     description,
     price,
-    category_id,
-    quantity
+    category_id
   }).returning('id');
 
   return id;
@@ -52,14 +51,13 @@ async deleteProduct(id)
   return await db('product').where('id',id).del();
 }
 
-async updateProduct(id,product_name,description,price,category_id,quantity)
+async updateProduct(id,product_name,description,price,category_id)
 {
   return db('product').where({ id: id}).update({
     product_name,
     description,
     price,
-    category_id,
-    quantity
+    category_id
   });
 }
 

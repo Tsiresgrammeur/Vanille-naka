@@ -58,7 +58,7 @@ class ProductService
   async createProduct(product)
   {
     const {product_name,description,price,category_id,quantity, image_1,image_2,image_3} = product;
-    const product_id=await productDAO.createProduct(product_name,description,price,category_id,quantity);
+    const product_id=await productDAO.createProduct(product_name,description,price,category_id);
     let image_name;
     let buff;
     let i=1;
@@ -131,7 +131,7 @@ class ProductService
       image_name=path_image+"/img_"+id+"_"+i+".jpeg"
       fs.writeFileSync(image_name,buff)
     }
-    return productDAO.updateProduct(id,product_name,description,price,category_id,quantity);
+    return productDAO.updateProduct(id,product_name,description,price,category_id);
   }
 }
 
