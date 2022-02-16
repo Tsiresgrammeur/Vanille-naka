@@ -10,6 +10,8 @@ exports.up = function(knex) {
     table.string('email').notNullable().unique();
     table.string('password');
     table.string('address').notNullable();
+    table.string('postal_code').notNullable();
+    table.string('town').notNullable();
     table.string('country').notNullable();
     table.string('role');
     table.string('numberPhone').notNullable();

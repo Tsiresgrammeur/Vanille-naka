@@ -18,7 +18,7 @@ class userDAO {
 
   }
 
-  async createUser(first_name, last_name,email, password, address,country, role, numberPhone)
+  async createUser(first_name, last_name,email, password, address,town,postal_code ,country, role, numberPhone)
   {
     const hashed = await bcrypt.hash(password, saltRounds);
     const [id] = await db('user').insert({
@@ -27,6 +27,8 @@ class userDAO {
       email,
       password: hashed,
       address,
+      town,
+      postal_code,
       country,
       role,
       numberPhone
@@ -40,7 +42,7 @@ class userDAO {
    return db('user').where('id',id).del();
   }
 
-  async updateUser(id, first_name, last_name,email, password, address,country, role, numberPhone)
+  async updateUser(id, first_name, last_name,email, password, address,town,postal_code,country, role, numberPhone)
   {
     if(password)
     {
@@ -51,6 +53,8 @@ class userDAO {
         email,
         password: hashed,
         address,
+        town,
+        postal_code,
         country,
         role,
         numberPhone
@@ -63,6 +67,8 @@ class userDAO {
         last_name,
         email,
         address,
+        town,
+        postal_code,
         country,
         role,
         numberPhone
