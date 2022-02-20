@@ -24,7 +24,7 @@ class UserService
 
   updateUser(id,user)
   {
-    const { first_name,last_name,email,password,addres,stown,postal_code,country,role,numberPhone} = user;
+    const { first_name,last_name,email,password,address,town,postal_code,country,role,numberPhone} = user;
     return userDAO.updateUser(id,first_name,last_name,email,password,address,town,postal_code,country,role,numberPhone);
   }
 }

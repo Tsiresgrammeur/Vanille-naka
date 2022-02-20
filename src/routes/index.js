@@ -30,6 +30,7 @@ router.post('/api/product/',productController.createProduct);
 router.delete('/api/product/:id',productController.deleteProduct);
 router.put('/api/product/:id',productController.updateProduct)
 
+router.get('/api/sale/best',saleController.bestSale)
 router.post('/api/sale/filter/',saleController.getSalesFiltered);
 router.post('/api/sale/',saleController.createSale);
 router.delete('/api/sale/:id',saleController.deleteSale);

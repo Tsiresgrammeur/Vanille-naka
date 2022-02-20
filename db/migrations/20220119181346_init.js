@@ -22,7 +22,7 @@ exports.up = function(knex) {
     })
     .createTable('product', (table) => {
       table.increments('id');
-      table.string('product_name');
+      table.string('product_name').notNullable().unique();
       table.string('description', 400);
       table.float('price');
       table.integer('category_id');

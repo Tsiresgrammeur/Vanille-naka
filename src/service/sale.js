@@ -24,6 +24,11 @@ class SaleService
     const { user_id,product_id,sale_date,quantity } = sale;
     return saleDAO.updateSale(id,user_id,product_id,sale_date,quantity);
   }
+
+  async bestSale()
+  {
+    return await saleDAO.bestSale();
+  }
 }
 
 module.exports = new SaleService();

@@ -52,6 +52,20 @@ class saleController {
     }
   }
 
+  async bestSale(req, res)
+  {
+    try{
+      const count = await saleService.bestSale();
+      if(count)
+      res.status(201).json(count);
+    }
+
+    catch(err){
+      console.error(err);
+    }
+
+  }
+
 
 
 }

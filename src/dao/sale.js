@@ -63,6 +63,11 @@ class saleDAO {
     });
   }
 
+  async bestSale()
+  {
+    return db.select('product_id').from('sale').count('*').groupBy('product_id').orderBy('count','desc').limit('5');
+  }
+
 }
 
 module.exports = new saleDAO();
